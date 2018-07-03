@@ -14,6 +14,12 @@ namespace VisualMan
     public partial class Window : Form
     {
         private String sourcepath;
+        private List<String> files;
+        private List<String> changes;
+        private List<String> types = new List<String> {".mkv", ".mp4", ".srt"};
+        private List<String> blacklist = new List<String> {"x264", "H264", "x265", "H265", "WEBRip",
+                                                           "BluRay", "BrRip", "BRip", "YIFY", "YTS AG",
+                                                           "YTS AM", "GAZ", "INTERNAL", "REPACK", "RABG"};
 
         public Window()
         {
@@ -35,17 +41,68 @@ namespace VisualMan
                 sourcepath = fbd.SelectedPath;
                 enterSource.Text = sourcepath;
             }
-            string[] files = Directory.GetFiles(sourcepath);
-            MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
         }
 
-        private void enterSource_KeyDown(object sender, KeyEventArgs e)
+        // Commit Path to Source Path on Enter
+        private void enterSource_Leave(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            sourcepath = enterSource.Text;
+        }
+
+        // Recursive Search
+        private void DirSearch(String source)
+        {
+            foreach (String file in Directory.GetFiles(source))
             {
-                sourcepath = enterSource.Text;
-                string[] files = Directory.GetFiles(sourcepath);
-                MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
+                if (types.IndexOf(Path.GetExtension(file)) >= 0)
+                    files.Add(file);
+            }
+
+            foreach (String dir in Directory.GetDirectories(source))
+            {
+                this.DirSearch(dir);
+            }
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            files = new List<String>();
+            changes = new List<String>();
+
+            DirSearch(sourcepath);
+            formatNames(files);
+            outputBox.Text = "";
+            outputBox.Text = String.Join(Environment.NewLine, changes);
+        }
+
+        private void formatNames(List<String> names)
+        {
+            foreach (String name in names)
+            {
+                String file = name.Substring(name.LastIndexOf(@"\") + 1);
+                String newName = file;
+                String extension = Path.GetExtension(name);
+                newName = newName.Replace("_", " ");
+                newName = newName.Replace("[", "");
+                newName = newName.Replace("]", "");
+                newName = newName.Replace(".", " ");
+                // Remove the '.' from file extension
+                foreach (String type in types)
+                    newName = newName.Replace(type.Substring(1), "");
+                foreach (String word in blacklist)
+                    newName = newName.Replace(word, "");
+
+                char[] Whitespace = {' ', '\t'};
+                String[] split = newName.Split(Whitespace, StringSplitOptions.RemoveEmptyEntries);
+                newName = String.Join(" ", split);
+
+                newName = newName + extension;
+                if (!newName.Equals(file))
+                {
+                    newName = name.Substring(0, name.LastIndexOf(@"\") + 1) + newName;
+                    Directory.Move(name, newName);
+                    changes.Add(newName);
+                }
             }
         }
     }

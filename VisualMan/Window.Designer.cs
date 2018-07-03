@@ -31,6 +31,8 @@
             this.browseButton = new System.Windows.Forms.Button();
             this.enterSource = new System.Windows.Forms.TextBox();
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
+            this.outputBox = new System.Windows.Forms.TextBox();
+            this.searchButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // browseButton
@@ -48,9 +50,29 @@
             // 
             this.enterSource.Location = new System.Drawing.Point(12, 415);
             this.enterSource.Name = "enterSource";
-            this.enterSource.Size = new System.Drawing.Size(695, 20);
+            this.enterSource.Size = new System.Drawing.Size(690, 20);
             this.enterSource.TabIndex = 1;
-            this.enterSource.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enterSource_KeyDown);
+            this.enterSource.Leave += new System.EventHandler(this.enterSource_Leave);
+            // 
+            // outputBox
+            // 
+            this.outputBox.Location = new System.Drawing.Point(12, 12);
+            this.outputBox.Multiline = true;
+            this.outputBox.Name = "outputBox";
+            this.outputBox.ReadOnly = true;
+            this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.outputBox.Size = new System.Drawing.Size(550, 350);
+            this.outputBox.TabIndex = 2;
+            // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(487, 368);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(75, 23);
+            this.searchButton.TabIndex = 3;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // Window
             // 
@@ -58,6 +80,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.searchButton);
+            this.Controls.Add(this.outputBox);
             this.Controls.Add(this.enterSource);
             this.Controls.Add(this.browseButton);
             this.Name = "Window";
@@ -73,6 +97,8 @@
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.TextBox enterSource;
         private System.Windows.Forms.FolderBrowserDialog fbd;
+        private System.Windows.Forms.TextBox outputBox;
+        private System.Windows.Forms.Button searchButton;
     }
 }
 
