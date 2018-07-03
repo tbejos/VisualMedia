@@ -20,6 +20,7 @@ namespace VisualMan
         private List<String> blacklist = new List<String> {"x264", "H264", "x265", "H265", "WEBRip",
                                                            "BluRay", "BrRip", "BRip", "YIFY", "YTS AG",
                                                            "YTS AM", "GAZ", "INTERNAL", "REPACK", "RABG"};
+        private Boolean dryrun = false;
 
         public Window()
         {
@@ -100,10 +101,21 @@ namespace VisualMan
                 if (!newName.Equals(file))
                 {
                     newName = name.Substring(0, name.LastIndexOf(@"\") + 1) + newName;
-                    Directory.Move(name, newName);
+                    if (!dryrun)
+                        Directory.Move(name, newName);
                     changes.Add(newName);
                 }
             }
+        }
+
+        private void writeBox_MouseEnter(object sender, EventArgs e)
+        {
+            dryRunTip.SetToolTip(writeBox, "Checking this will output the changes but will not actually overwrite the files");
+        }
+
+        private void writeBox_CheckedChanged(object sender, EventArgs e)
+        {
+            dryrun = !dryrun;
         }
     }
 }

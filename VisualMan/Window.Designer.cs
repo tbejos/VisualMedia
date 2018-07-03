@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.browseButton = new System.Windows.Forms.Button();
             this.enterSource = new System.Windows.Forms.TextBox();
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             this.outputBox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
+            this.writeBox = new System.Windows.Forms.CheckBox();
+            this.dryRunTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // browseButton
@@ -74,12 +77,30 @@
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
+            // writeBox
+            // 
+            this.writeBox.AutoSize = true;
+            this.writeBox.Location = new System.Drawing.Point(579, 13);
+            this.writeBox.Name = "writeBox";
+            this.writeBox.Size = new System.Drawing.Size(65, 17);
+            this.writeBox.TabIndex = 4;
+            this.writeBox.Text = "Dry Run";
+            this.writeBox.UseVisualStyleBackColor = true;
+            this.writeBox.CheckedChanged += new System.EventHandler(this.writeBox_CheckedChanged);
+            this.writeBox.MouseEnter += new System.EventHandler(this.writeBox_MouseEnter);
+            // 
+            // dryRunTip
+            // 
+            this.dryRunTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.dryRunTip.ToolTipTitle = "Dry Run:";
+            // 
             // Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.writeBox);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.outputBox);
             this.Controls.Add(this.enterSource);
@@ -99,6 +120,8 @@
         private System.Windows.Forms.FolderBrowserDialog fbd;
         private System.Windows.Forms.TextBox outputBox;
         private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.CheckBox writeBox;
+        private System.Windows.Forms.ToolTip dryRunTip;
     }
 }
 
