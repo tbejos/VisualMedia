@@ -74,6 +74,7 @@ namespace VisualMan
             formatNames(files);
             outputBox.Text = "";
             outputBox.Text = String.Join(Environment.NewLine, changes);
+            outputBox.Text += "\nDone.";
         }
 
         private void formatNames(List<String> names)
