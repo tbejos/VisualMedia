@@ -80,7 +80,15 @@ namespace VisualMan
             changes = new List<String>();
             delete = new List<String>();
 
+            if (!Directory.Exists(sourcepath))
+            {
+                outputBox.Text = "Please enter a valid directory";
+                return;
+            }
+
             DirSearch(sourcepath);
+            if (dryrun)
+                changes.Add("**DRY RUN**");
             deleteFiles();
             formatNames(files);
             outputBox.Text = "";
