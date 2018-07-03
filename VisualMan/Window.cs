@@ -25,11 +25,6 @@ namespace VisualMan
            
         }
 
-        private void enterSource_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         // Bring up a dialog to chose a folder path
         private void browseButton_Click(object sender, EventArgs e)
         {
@@ -39,6 +34,18 @@ namespace VisualMan
             {
                 sourcepath = fbd.SelectedPath;
                 enterSource.Text = sourcepath;
+            }
+            string[] files = Directory.GetFiles(sourcepath);
+            MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
+        }
+
+        private void enterSource_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                sourcepath = enterSource.Text;
+                string[] files = Directory.GetFiles(sourcepath);
+                MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
             }
         }
     }

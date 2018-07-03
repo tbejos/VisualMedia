@@ -50,7 +50,7 @@
             this.enterSource.Name = "enterSource";
             this.enterSource.Size = new System.Drawing.Size(695, 20);
             this.enterSource.TabIndex = 1;
-            this.enterSource.TextChanged += new System.EventHandler(this.enterSource_TextChanged);
+            this.enterSource.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enterSource_KeyDown);
             // 
             // Window
             // 
