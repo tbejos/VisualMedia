@@ -39,8 +39,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.renameTab = new System.Windows.Forms.TabPage();
             this.convertTab = new System.Windows.Forms.TabPage();
+            this.aboutTab = new System.Windows.Forms.TabPage();
+            this.author = new System.Windows.Forms.Label();
+            this.link = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.renameTab.SuspendLayout();
+            this.aboutTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // browseButton
@@ -69,7 +73,7 @@
             this.outputBox.Name = "outputBox";
             this.outputBox.ReadOnly = true;
             this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.outputBox.Size = new System.Drawing.Size(550, 350);
+            this.outputBox.Size = new System.Drawing.Size(550, 355);
             this.outputBox.TabIndex = 2;
             // 
             // runButton
@@ -103,6 +107,7 @@
             // 
             this.tabControl1.Controls.Add(this.renameTab);
             this.tabControl1.Controls.Add(this.convertTab);
+            this.tabControl1.Controls.Add(this.aboutTab);
             this.tabControl1.Location = new System.Drawing.Point(1, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -134,6 +139,37 @@
             this.convertTab.TabIndex = 1;
             this.convertTab.Text = "Convert";
             // 
+            // aboutTab
+            // 
+            this.aboutTab.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.aboutTab.Controls.Add(this.link);
+            this.aboutTab.Controls.Add(this.author);
+            this.aboutTab.Location = new System.Drawing.Point(4, 22);
+            this.aboutTab.Name = "aboutTab";
+            this.aboutTab.Size = new System.Drawing.Size(794, 424);
+            this.aboutTab.TabIndex = 2;
+            this.aboutTab.Text = "About";
+            // 
+            // author
+            // 
+            this.author.AutoSize = true;
+            this.author.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.author.Location = new System.Drawing.Point(18, 14);
+            this.author.Name = "author";
+            this.author.Size = new System.Drawing.Size(180, 25);
+            this.author.TabIndex = 0;
+            this.author.Text = "Made by: tbejos";
+            // 
+            // link
+            // 
+            this.link.AutoSize = true;
+            this.link.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link.Location = new System.Drawing.Point(18, 56);
+            this.link.Name = "link";
+            this.link.Size = new System.Drawing.Size(633, 25);
+            this.link.TabIndex = 1;
+            this.link.Text = "Get updates from: https://www.github.com/tbejos/VideoMan";
+            // 
             // Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,6 +183,8 @@
             this.tabControl1.ResumeLayout(false);
             this.renameTab.ResumeLayout(false);
             this.renameTab.PerformLayout();
+            this.aboutTab.ResumeLayout(false);
+            this.aboutTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -163,6 +201,9 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage renameTab;
         private System.Windows.Forms.TabPage convertTab;
+        private System.Windows.Forms.TabPage aboutTab;
+        private System.Windows.Forms.Label author;
+        private System.Windows.Forms.Label link;
     }
 }
 
