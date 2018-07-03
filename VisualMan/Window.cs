@@ -95,6 +95,7 @@ namespace VisualMan
             deleteFiles();
             formatNames(files);
             formatNames(directories);
+            changes.Add("Done.");
             outputBox.Text = "";
             outputBox.Text = String.Join(Environment.NewLine, changes);
         }
@@ -143,7 +144,6 @@ namespace VisualMan
                     changes.Add(newName);
                 }
             }
-            changes.Add("Done.");
         }
 
         private void deleteFiles()
