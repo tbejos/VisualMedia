@@ -17,13 +17,17 @@ namespace VisualMan
         private String sourcepath;
         private List<String> files;
         private List<String> changes;
+        private List<String> delete;
         private List<String> types = new List<String> {".mkv", ".mp4", ".srt"};
+        private List<String> deleteType = new List<String> { ".vtt", ".torrent" };
         private List<String> blacklist = new List<String> {"x264", "H264", "x265", "H265", "WEBRip",
                                                            "BluRay", "BrRip", "BRip", "YIFY", "YTS AG",
-                                                           "YTS AM", "GAZ", "INTERNAL", "REPACK", "RABG"};
+                                                           "YTS AM", "GAZ", "INTERNAL", "REPACK", "RABG",
+                                                           "HDTV"};
         private Regex year = new Regex("[\\s][0-9]{4}[\\s]");
         private Regex resolution = new Regex("[\\s[0-9]{3,4}p[\\s]");
         private Boolean dryrun = false;
+        private Boolean deleteExtras = false;
 
         public Window()
         {
@@ -60,6 +64,8 @@ namespace VisualMan
             {
                 if (types.IndexOf(Path.GetExtension(file)) >= 0)
                     files.Add(file);
+                else if (deleteType.IndexOf(Path.GetExtension(file)) >= 0)
+                    delete.Add(file);
             }
 
             foreach (String dir in Directory.GetDirectories(source))
@@ -72,8 +78,10 @@ namespace VisualMan
         {
             files = new List<String>();
             changes = new List<String>();
+            delete = new List<String>();
 
             DirSearch(sourcepath);
+            deleteFiles();
             formatNames(files);
             outputBox.Text = "";
             outputBox.Text = String.Join(Environment.NewLine, changes);
@@ -124,6 +132,19 @@ namespace VisualMan
             changes.Add("Done.");
         }
 
+        private void deleteFiles()
+        {
+            if (deleteExtras)
+            {
+                foreach (String extras in delete)
+                {
+                    if (!dryrun)
+                        File.Delete(extras);
+                    changes.Add(extras);
+                }
+            }
+        }
+
         private void writeBox_MouseEnter(object sender, EventArgs e)
         {
             dryRunTip.SetToolTip(writeBox, "Checking this will output the changes but will not actually overwrite the files");
@@ -134,5 +155,14 @@ namespace VisualMan
             dryrun = !dryrun;
         }
 
+        private void deleteBox_CheckStateChanged(object sender, EventArgs e)
+        {
+            deleteExtras = !deleteExtras;
+        }
+
+        private void deleteBox_MouseEnter(object sender, EventArgs e)
+        {
+            deleteTip.SetToolTip(deleteBox, "This will delete .vtt and .torrent files");
+        }
     }
 }

@@ -42,6 +42,8 @@
             this.aboutTab = new System.Windows.Forms.TabPage();
             this.author = new System.Windows.Forms.Label();
             this.link = new System.Windows.Forms.Label();
+            this.deleteBox = new System.Windows.Forms.CheckBox();
+            this.deleteTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.renameTab.SuspendLayout();
             this.aboutTab.SuspendLayout();
@@ -117,6 +119,7 @@
             // renameTab
             // 
             this.renameTab.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.renameTab.Controls.Add(this.deleteBox);
             this.renameTab.Controls.Add(this.outputBox);
             this.renameTab.Controls.Add(this.enterSource);
             this.renameTab.Controls.Add(this.runButton);
@@ -170,6 +173,23 @@
             this.link.TabIndex = 1;
             this.link.Text = "Get updates from: https://www.github.com/tbejos/VideoMan";
             // 
+            // deleteBox
+            // 
+            this.deleteBox.AutoSize = true;
+            this.deleteBox.Location = new System.Drawing.Point(575, 34);
+            this.deleteBox.Name = "deleteBox";
+            this.deleteBox.Size = new System.Drawing.Size(89, 17);
+            this.deleteBox.TabIndex = 5;
+            this.deleteBox.Text = "Delete Extras";
+            this.deleteBox.UseVisualStyleBackColor = true;
+            this.deleteBox.CheckStateChanged += new System.EventHandler(this.deleteBox_CheckStateChanged);
+            this.deleteBox.MouseEnter += new System.EventHandler(this.deleteBox_MouseEnter);
+            // 
+            // deleteTip
+            // 
+            this.deleteTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.deleteTip.ToolTipTitle = "Delete Extra Files";
+            // 
             // Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -204,6 +224,8 @@
         private System.Windows.Forms.TabPage aboutTab;
         private System.Windows.Forms.Label author;
         private System.Windows.Forms.Label link;
+        private System.Windows.Forms.CheckBox deleteBox;
+        private System.Windows.Forms.ToolTip deleteTip;
     }
 }
 
