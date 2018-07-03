@@ -16,6 +16,7 @@ namespace VisualMan
     {
         private String sourcepath;
         private List<String> files;
+        private List<String> directories;
         private List<String> changes;
         private List<String> delete;
         private List<String> types = new List<String> {".mkv", ".mp4", ".srt"};
@@ -70,6 +71,7 @@ namespace VisualMan
 
             foreach (String dir in Directory.GetDirectories(source))
             {
+                directories.Add(dir);
                 this.DirSearch(dir);
             }
         }
@@ -79,6 +81,7 @@ namespace VisualMan
             files = new List<String>();
             changes = new List<String>();
             delete = new List<String>();
+            directories = new List<string>();
 
             if (!Directory.Exists(sourcepath))
             {
@@ -91,6 +94,7 @@ namespace VisualMan
                 changes.Add("**DRY RUN**");
             deleteFiles();
             formatNames(files);
+            formatNames(directories);
             outputBox.Text = "";
             outputBox.Text = String.Join(Environment.NewLine, changes);
         }
@@ -101,7 +105,9 @@ namespace VisualMan
             {
                 String file = name.Substring(name.LastIndexOf(@"\") + 1);
                 String newName = file;
-                String extension = Path.GetExtension(name);
+                String extension = "";
+                if (!Directory.Exists(name))
+                    extension = Path.GetExtension(name);
                 newName = newName.Replace("_", " ");
                 newName = newName.Replace("[", "");
                 newName = newName.Replace("]", "");
@@ -121,7 +127,7 @@ namespace VisualMan
                 if (match.Success)
                 {
                     newName = newName.Replace(match.Value, "");
-                    newName += match.Value;
+                    newName += " " + match.Value;
                 }
 
                 char[] Whitespace = {' ', '\t'};
