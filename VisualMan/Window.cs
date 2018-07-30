@@ -122,7 +122,7 @@ namespace VisualMan
                 Match match = year.Match(newName);
                 if (match.Success)
                 {
-                    newName = newName.Replace(match.Value, "(" + match.Value.Replace(" ", "") + ")");
+                    newName = newName.Replace(match.Value, " (" + match.Value.Replace(" ", "") + ") ");
                 }
                 match = resolution.Match(newName);
                 if (match.Success)
