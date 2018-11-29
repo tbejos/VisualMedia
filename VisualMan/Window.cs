@@ -19,12 +19,12 @@ namespace VisualMan
         private List<String> directories;
         private List<String> changes;
         private List<String> delete;
-        private List<String> types = new List<String> {".mkv", ".mp4", ".srt"};
-        private List<String> deleteType = new List<String> { ".vtt", ".torrent" };
+        private List<String> types = new List<String> {".mkv", ".mp4", ".avi", ".srt"};
+        private List<String> deleteType = new List<String> { ".vtt", ".torrent", ".db", ".rtf"};
         private List<String> blacklist = new List<String> {"x264", "H264", "x265", "H265", "WEBRip",
                                                            "BluRay", "BrRip", "BRip", "YIFY", "YTS AG",
                                                            "YTS AM", "GAZ", "INTERNAL", "REPACK", "RABG",
-                                                           "HDTV"};
+                                                           "HDTV", "AAC-RARBG", "DVDRip", "XviD"};
         private Regex year = new Regex("[\\s][0-9]{4}[\\s]");
         private Regex resolution = new Regex("[\\s[0-9]{3,4}p[\\s]");
         private Boolean dryrun = false;
@@ -114,8 +114,9 @@ namespace VisualMan
                 newName = newName.Replace("]", "");
                 newName = newName.Replace(".", " ");
                 // Remove the '.' from file extension
+                // Add the space so that movies with 'avi' (or any other type) in it don't get cut
                 foreach (String type in types)
-                    newName = newName.Replace(type.Substring(1), "");
+                    newName = newName.Replace(" " + type.Substring(1), "");
                 foreach (String word in blacklist)
                     newName = newName.Replace(word, "");
 
