@@ -23,7 +23,7 @@ namespace VisualMan
         private List<String> deleteType = new List<String> { ".vtt", ".torrent", ".db", ".rtf"};
         private List<String> blacklist = new List<String> {"x264", "H264", "x265", "H265", "WEBRip",
                                                            "BluRay", "BrRip", "BRip", "YIFY", "YTS AG",
-                                                           "YTS AM", "GAZ", "INTERNAL", "REPACK", "RABG",
+                                                           "YTS AM", "GAZ", "INTERNAL", "REPACK", "RARBG",
                                                            "HDTV", "AAC-RARBG", "DVDRip", "XviD"};
         private Regex year = new Regex("[\\s][0-9]{4}[\\s]");
         private Regex resolution = new Regex("[\\s[0-9]{3,4}p[\\s]");
@@ -135,6 +135,7 @@ namespace VisualMan
                 char[] Whitespace = {' ', '\t'};
                 String[] split = newName.Split(Whitespace, StringSplitOptions.RemoveEmptyEntries);
                 newName = String.Join(" ", split);
+                newName = newName.Replace(" - ", " ");
 
                 newName = newName + extension;
                 if (!newName.Equals(file))
